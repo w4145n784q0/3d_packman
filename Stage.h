@@ -5,8 +5,8 @@
 class Stage :
     public GameObject
 {
-    int hFloor_;
-    int hBlock_;
+    int hFloor_;//床
+    int hBlock_;//ブロック
     int stageArray_[14][14];
 public:
     //コンストラクタ
