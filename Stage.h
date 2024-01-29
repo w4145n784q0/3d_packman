@@ -1,13 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include<vector>
-
+using std::vector;
 class Stage :
     public GameObject
 {
     int hFloor_;//床
     int hBlock_;//ブロック
-    int stageArray_[14][14];
+    int STAGE_X;
+    int STAGE_Y;
+    vector<int> stageArray_;
 public:
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）
