@@ -7,9 +7,7 @@ class Stage :
 {
     int hFloor_;//床
     int hBlock_;//ブロック
-    int STAGE_X;
-    int STAGE_Y;
-    vector<int> stageArray_;
+    vector<vector<int>> stageData_;
 public:
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）

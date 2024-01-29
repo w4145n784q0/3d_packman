@@ -1,6 +1,6 @@
 #include "PlayScene.h"
 #include"Stage.h"
-//#include"Block.h"
+#include"Player.h"
 
 
 PlayScene::PlayScene(GameObject* parent)
@@ -11,6 +11,7 @@ PlayScene::PlayScene(GameObject* parent)
 void PlayScene::Initialize()
 {
 	Instantiate<Stage>(this);
+	Instantiate<Player>(this);
 }
 
 void PlayScene::Update()

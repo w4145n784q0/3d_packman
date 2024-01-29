@@ -1,11 +1,55 @@
-#include "Stage.h"
+﻿#include "Stage.h"
 #include"Engine/Model.h"
 #include"Engine/Camera.h"
 #include"Engine/CsvReader.h"
 
+namespace
+{
+	const int STAGE_X{ 15 };
+	const int STAGE_Y{ 15 };
+	const int sArray[STAGE_Y][STAGE_X]{
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+}
+
 Stage::Stage(GameObject* parent)
 	:GameObject(parent, "Stage")//,hFloor_(-1),hBlock_(-1)
 {
+	CsvReader csv;
+	csv.Load("map.csv");
+	int w  = csv.GetWidth();    //１行に何個データがあるか
+	int h = csv.GetHeight();   //データが何行あるか
+
+	
+	for (int i = 0; i < STAGE_Y; i++)
+	{
+		vector<int> sdata(STAGE_X, 0);
+		stageData_.push_back(sdata);
+	}
+	//vector<vector<int>> stageData_(STAGE_Y, vector<int>(STAGE_X, 0));
+
+
+	for (int j = 0; j < STAGE_Y; j++)
+	{
+		for (int i = 0; i < STAGE_X; i++)
+		{
+			stageData_[j][i] = csv.GetValue(i, j);
+		}
+	}
 }
 
 void Stage::Initialize()
@@ -17,8 +61,7 @@ void Stage::Initialize()
 	Camera::SetPosition({ 6.5, 10, -5 });
 	Camera::SetTarget({ 6.5, 0, 5.5 });
 	
-	/*CsvReader csv;
-	csv.Load("Stage.csv");*/
+	
 }
 
 void Stage::Update()
@@ -27,10 +70,8 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-	Transform floorTrans;
+	/*Transform floorTrans;
 	floorTrans.position_ = { 0,0,0 };
-	/*int width = 0;
-	int height = 0;*/
 
 	for (int z = 0; z < 15; z++){
 		for (int x = 0; x < 15; x++){
@@ -46,27 +87,32 @@ void Stage::Draw()
 				Model::Draw(hFloor_);
 
 			}
-			
-		}
-	}
-
-	/*for (int z = 0; z < 15; z++)
-	{
-		for (int x = 0; x < 15; x++)
-		{
-			floorTrans.position_ = { (float)x, 0 ,(float)z };
-			if(x == 0 || z == 0 || x == 14 || z == 14)
-			{
-				Model::SetTransform(hBlock_, floorTrans);
-				Model::Draw(hBlock_);
-			}
-			Model::SetTransform(hFloor_, floorTrans);
-			Model::Draw(hFloor_);
 
 		}
 	}*/
 
+	Transform floorTrans;
+	floorTrans.position_ = { 0,0,0 };
 
+
+
+	for (int z = 0; z < 15; z++) {
+		for (int x = 0; x < 15; x++) {
+
+			floorTrans.position_ = { (float)x, 0 ,(float)z };
+			if (stageData_[z][x] == 1) {
+				Model::SetTransform(hBlock_, floorTrans);
+				Model::Draw(hBlock_);
+			}
+			else {
+				Model::SetTransform(hFloor_, floorTrans);
+				Model::Draw(hFloor_);
+
+
+			}
+		}
+
+	}
 }
 
 void Stage::Release()
