@@ -30,7 +30,7 @@ Stage::Stage(GameObject* parent)
 	:GameObject(parent, "Stage")//,hFloor_(-1),hBlock_(-1)
 {
 	CsvReader csv;
-	csv.Load("map.csv");
+	csv.Load("map2.csv");
 	int w  = csv.GetWidth();    //１行に何個データがあるか
 	int h = csv.GetHeight();   //データが何行あるか
 
@@ -66,6 +66,7 @@ void Stage::Initialize()
 
 void Stage::Update()
 {
+
 }
 
 void Stage::Draw()
@@ -99,7 +100,7 @@ void Stage::Draw()
 	for (int z = 0; z < 15; z++) {
 		for (int x = 0; x < 15; x++) {
 
-			floorTrans.position_ = { (float)x, 0 ,(float)z };
+			floorTrans.position_ = { (float)x, 0 ,(float)(14-z) };
 			if (stageData_[z][x] == 1) {
 				Model::SetTransform(hBlock_, floorTrans);
 				Model::Draw(hBlock_);
