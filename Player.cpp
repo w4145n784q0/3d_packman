@@ -2,13 +2,15 @@
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
+#include"Stage.h"
 
 namespace {
 	const float PLAYER_MOVE_SPEED{ 1.0f };
 }
 
 Player::Player(GameObject* parent)
-	:GameObject(parent,"Player"),hModel_(-1)
+	:GameObject(parent,"Player"),
+	hModel_(-1),speed_(PLAYER_MOVE_SPEED),pStage_(nullptr)
 {
 }
 
@@ -19,6 +21,7 @@ void Player::Initialize()
 	assert(hModel_ >= 0);
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
+	pStage_ = (Stage *)FindObject("Stage");
 	//map[13][1]が[z][x]が初期位置
 
 }
@@ -57,25 +60,48 @@ void Player::Update()
 	}
 
 	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-	pos = pos + speed * move;
+	XMVECTOR postmp = XMVectorZero();//zeroベクトル
+	postmp = postmp + speed * move;
 
-	Debug::Log("(X,Z)=");
+	int tx, ty;
+	tx = (int)(XMVectorGetX(pos) + 0.5);
+	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(pos) + 0.5);
+	if (!(pStage_->IsWall(tx, ty)))
+	{
+		pos = postmp;
+	}
+
+
+	//pos = pos + speed * move;
+
+	//postmp.x,postmp.z => int tx,tz :配列のインデックスに変換
+	//仮にmapの配列をmap[][]とする
+	//移動先がフロアだったら動く(STAGE_OBJ::FLOOR => 0)
+	//if (map[ty][tx] == STAGE_OBJ::floor) {pos = pos + speed * move;}
+
+	
+	
+
+	/*Debug::Log("(X,Z)=");//もう使わない
 	Debug::Log(XMVectorGetX(pos));
 	Debug::Log(",");
-	Debug::Log(XMVectorGetZ(pos),true);
-	for (int y = 13; y < 0; y--)
-	{
-		for (int x = 0;  x < 13; x++)
-		{
+	Debug::Log(XMVectorGetZ(pos),true);*/
+	
+	
+	/*Debug::Log("(iX,iZ)=");
+	Debug::Log(tx);
+	Debug::Log(",");
+	Debug::Log(ty,true);
+	Debug::Log(":");
+	Debug::Log(pStage_->IsWall(tx, ty));*/
 
-		}
-	}
+	
 
 
 	if (!XMVector3Equal(move, XMVectorZero())){
 		XMStoreFloat3(&(transform_.position_), pos);
 
-			XMVECTOR vdot = XMVector3Dot(vFlont, move);//XMVector3Dot = ベクトル野菜遺跡を求める
+			XMVECTOR vdot = XMVector3Dot(vFlont, move);//XMVector3Dot = ベクトルの内積を求める
 			assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 			float angle = acos(XMVectorGetX(vdot));//acosはラジアンでかえってくる
 

@@ -5,7 +5,7 @@
 
 namespace
 {
-	const int STAGE_X{ 15 };
+	/*const int STAGE_X{ 15 };
 	const int STAGE_Y{ 15 };
 	const int sArray[STAGE_Y][STAGE_X]{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -22,8 +22,18 @@ namespace
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}*/
+};
+
+
+bool Stage::IsWall(int _x, int _y)
+{
+	assert(_x >= 0 && _x <= 14);
+	assert(_y >= 0 && _y <= 14);
+	if (stageData_[_y][_x] == STAGE_OBJ::WALL)
+		true;
+	else
+		return false;
 }
 
 Stage::Stage(GameObject* parent)
@@ -31,21 +41,22 @@ Stage::Stage(GameObject* parent)
 {
 	CsvReader csv;
 	csv.Load("map2.csv");
-	int w  = csv.GetWidth();    //１行に何個データがあるか
-	int h = csv.GetHeight();   //データが何行あるか
 
+	stageWidth_ = csv.GetWidth();    //１行に何個データがあるか
+	stageHeight_ = csv.GetHeight();   //データが何行あるか
 	
-	for (int i = 0; i < STAGE_Y; i++)
+	
+	for (int i = 0; i < stageHeight_; i++)
 	{
-		vector<int> sdata(STAGE_X, 0);
+		vector<int> sdata(stageWidth_, 0);
 		stageData_.push_back(sdata);
 	}
 	//vector<vector<int>> stageData_(STAGE_Y, vector<int>(STAGE_X, 0));
 
 
-	for (int j = 0; j < STAGE_Y; j++)
+	for (int j = 0; j < stageHeight_; j++)
 	{
-		for (int i = 0; i < STAGE_X; i++)
+		for (int i = 0; i < stageWidth_; i++)
 		{
 			stageData_[j][i] = csv.GetValue(i, j);
 		}
@@ -96,8 +107,8 @@ void Stage::Draw()
 
 
 
-	for (int z = 0; z < 15; z++) {
-		for (int x = 0; x < 15; x++) {
+	for (int z = 0; z < stageHeight_; z++) {
+		for (int x = 0; x < stageWidth_; x++) {
 
 			floorTrans.position_ = { (float)x, 0 ,(float)(14-z) };
 			if (stageData_[z][x] == 1) {
@@ -117,4 +128,10 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+	//配列を消す
+	for (int i = 0; i < stageHeight_; i++)
+	{
+		stageData_[i].clear();
+	}
+	stageData_.clear();
 }

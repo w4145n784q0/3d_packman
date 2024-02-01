@@ -2,13 +2,26 @@
 #include "Engine/GameObject.h"
 #include<vector>
 using std::vector;
+
+enum STAGE_OBJ {
+    FLOOR,
+    WALL,
+};
+
+
 class Stage :
     public GameObject
 {
     int hFloor_;//床
     int hBlock_;//ブロック
     vector<vector<int>> stageData_;
+    int stageWidth_, stageHeight_;
+    /*int STAGE_X;
+    int STAGE_Y;*/
 public:
+    int GetStageWidth() { return stageWidth_; }
+    int GetStageHeight() { return stageHeight_; }
+    bool IsWall(int _x, int _y);
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）
     Stage(GameObject* parent);
