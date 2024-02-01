@@ -61,7 +61,6 @@ void Stage::Initialize()
 	Camera::SetPosition({ 6.5, 10, -5 });
 	Camera::SetTarget({ 6.5, 0, 5.5 });
 	
-	
 }
 
 void Stage::Update()
