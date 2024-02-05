@@ -16,8 +16,7 @@ class Stage :
     int hBlock_;//ƒuƒƒbƒN
     vector<vector<int>> stageData_;
     int stageWidth_, stageHeight_;
-    /*int STAGE_X;
-    int STAGE_Y;*/
+    
 public:
     int GetStageWidth() { return stageWidth_; }
     int GetStageHeight() { return stageHeight_; }

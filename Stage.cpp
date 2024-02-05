@@ -31,7 +31,7 @@ bool Stage::IsWall(int _x, int _y)
 	assert(_x >= 0 && _x <= 14);
 	assert(_y >= 0 && _y <= 14);
 	if (stageData_[_y][_x] == STAGE_OBJ::WALL)
-		true;
+		return true;
 	else
 		return false;
 }
@@ -40,7 +40,7 @@ Stage::Stage(GameObject* parent)
 	:GameObject(parent, "Stage")//,hFloor_(-1),hBlock_(-1)
 {
 	CsvReader csv;
-	csv.Load("map2.csv");
+	csv.Load("map2_.csv");//csv（コンマ区切り）で保存
 
 	stageWidth_ = csv.GetWidth();    //１行に何個データがあるか
 	stageHeight_ = csv.GetHeight();   //データが何行あるか
@@ -51,7 +51,6 @@ Stage::Stage(GameObject* parent)
 		vector<int> sdata(stageWidth_, 0);
 		stageData_.push_back(sdata);
 	}
-	//vector<vector<int>> stageData_(STAGE_Y, vector<int>(STAGE_X, 0));
 
 
 	for (int j = 0; j < stageHeight_; j++)
@@ -69,7 +68,7 @@ void Stage::Initialize()
 	assert(hFloor_ >= 0);
 	hBlock_ = Model::Load("wall.fbx");
 	assert(hBlock_ >= 0);
-	Camera::SetPosition({ 6.5, 10, -5 });
+	Camera::SetPosition({ 6.5, 10, -3 });
 	Camera::SetTarget({ 6.5, 0, 5.5 });
 	
 }
@@ -105,12 +104,10 @@ void Stage::Draw()
 	Transform floorTrans;
 	floorTrans.position_ = { 0,0,0 };
 
-
-
 	for (int z = 0; z < stageHeight_; z++) {
 		for (int x = 0; x < stageWidth_; x++) {
-
 			floorTrans.position_ = { (float)x, 0 ,(float)(14-z) };
+
 			if (stageData_[z][x] == 1) {
 				Model::SetTransform(hBlock_, floorTrans);
 				Model::Draw(hBlock_);

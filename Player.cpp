@@ -61,39 +61,39 @@ void Player::Update()
 
 	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 	XMVECTOR postmp = XMVectorZero();//zeroベクトル
-	postmp = postmp + speed * move;
+	postmp = pos + speed * move;
 
 	int tx, ty;
-	tx = (int)(XMVectorGetX(pos) + 0.5);
-	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(pos) + 0.5);
+	tx = (int)(XMVectorGetX(postmp) + 1.0f);
+	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(postmp) + 1.0f);
 	if (!(pStage_->IsWall(tx, ty)))
 	{
 		pos = postmp;
 	}
 
 
-	//pos = pos + speed * move;
+	
 
 	//postmp.x,postmp.z => int tx,tz :配列のインデックスに変換
 	//仮にmapの配列をmap[][]とする
 	//移動先がフロアだったら動く(STAGE_OBJ::FLOOR => 0)
 	//if (map[ty][tx] == STAGE_OBJ::floor) {pos = pos + speed * move;}
-
+	//pos = pos + speed * move;
 	
 	
 
-	/*Debug::Log("(X,Z)=");//もう使わない
+	Debug::Log("(X,Z)=");
 	Debug::Log(XMVectorGetX(pos));
 	Debug::Log(",");
-	Debug::Log(XMVectorGetZ(pos),true);*/
+	Debug::Log(XMVectorGetZ(pos),true);
 	
 	
-	/*Debug::Log("(iX,iZ)=");
+	Debug::Log("(iX,iZ)=");
 	Debug::Log(tx);
 	Debug::Log(",");
 	Debug::Log(ty,true);
 	Debug::Log(":");
-	Debug::Log(pStage_->IsWall(tx, ty));*/
+	Debug::Log(pStage_->IsWall(tx, ty));
 
 	
 
