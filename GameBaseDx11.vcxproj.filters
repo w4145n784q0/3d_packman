@@ -27,6 +27,15 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{42ceb05f-bb45-4abe-80b6-158e16661610}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Play">
+      <UniqueIdentifier>{98e8e7bb-8ff3-46ea-b9bc-2c092ae3a3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{808e6503-79b2-462c-8b0d-4a0b1afb26f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Clear">
+      <UniqueIdentifier>{0da40d64-6887-4026-a2c8-1887fe1225d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -99,16 +108,24 @@
     <ClCompile Include="Engine\VFX.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
     <ClCompile Include="PlayScene.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Scene\Play</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Scene\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Gauge.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>Scene\Clear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -181,16 +198,24 @@
     <ClInclude Include="Engine\VFX.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
     <ClInclude Include="PlayScene.h">
-      <Filter>Scene</Filter>
+      <Filter>Scene\Play</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
-      <Filter>Scene</Filter>
+      <Filter>Scene\Play</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Gauge.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>Scene\Clear</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
