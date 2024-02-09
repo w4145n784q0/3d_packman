@@ -36,6 +36,9 @@
     <Filter Include="Scene\Clear">
       <UniqueIdentifier>{0da40d64-6887-4026-a2c8-1887fe1225d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\GameOver">
+      <UniqueIdentifier>{d95cdbd1-d07b-413b-96f2-ab7b572de45f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -126,6 +129,7 @@
     <ClCompile Include="ClearScene.cpp">
       <Filter>Scene\Clear</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -216,6 +220,7 @@
     <ClInclude Include="ClearScene.h">
       <Filter>Scene\Clear</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
