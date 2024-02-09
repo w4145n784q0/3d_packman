@@ -36,7 +36,7 @@ void Player::Update()
 	int moveDir = Dir::NONE;*/
 
 	XMVECTOR vFlont = { 0,0,1,0 };//
-	XMVECTOR move{ 0,0,0,0 };//移動ベクトル
+	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
 	float speed = 1.0;
 
 
@@ -80,16 +80,11 @@ void Player::Update()
 		}
 	}
 
-
-	
-
 	//postmp.x,postmp.z => int tx,tz :配列のインデックスに変換
 	//仮にmapの配列をmap[][]とする
 	//移動先がフロアだったら動く(STAGE_OBJ::FLOOR => 0)
 	//if (map[ty][tx] == STAGE_OBJ::floor) {pos = pos + speed * move;}
 	//pos = pos + speed * move;
-	
-	
 
 	//Debug::Log("(X,Z)=");
 	//Debug::Log(XMVectorGetX(pos));

@@ -9,7 +9,7 @@ void Enemy::Initialize()
 {
 	hModel_ = Model::Load("Enemy_packman1.fbx");
 	assert(hModel_ >= 0);
-	transform_.position_ = { 3,1,5 };
+	transform_.position_ = { 4.5,0,6.5 };
 	transform_.scale_ = { 0.5,0.5,0.5 };
 }
 

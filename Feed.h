@@ -1,12 +1,18 @@
 #pragma once
 #include "Engine/GameObject.h"
-class GameOverScene :
+#include<vector>
+using std::vector;
+
+class Feed :
     public GameObject
-{ 
+{
+    int hModel_;//
+    vector<vector<int>> stageData_;
+    int stageWidth_, stageHeight_;
 public:
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）
-    GameOverScene(GameObject* parent);
+    Feed(GameObject* parent);
 
     //初期化
     void Initialize() override;
@@ -19,5 +25,6 @@ public:
 
     //開放
     void Release() override;
+
 };
 

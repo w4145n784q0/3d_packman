@@ -94,10 +94,8 @@ void Stage::Draw()
 			else
 			{
 				Model::SetTransform(hFloor_, floorTrans);
-				Model::Draw(hFloor_);
-
+				Model::Draw(hFloor_)
 			}
-
 		}
 	}*/
 
