@@ -136,6 +136,7 @@
       <Filter>Scene\Play</Filter>
     </ClCompile>
     <ClCompile Include="Feed.cpp" />
+    <ClCompile Include="MapFeedSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -233,6 +234,7 @@
       <Filter>Scene\Play</Filter>
     </ClInclude>
     <ClInclude Include="Feed.h" />
+    <ClInclude Include="MapFeedSet.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

@@ -153,6 +153,7 @@
     <ClCompile Include="Feed.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="MapFeedSet.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Feed.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="MapFeedSet.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
