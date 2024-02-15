@@ -5,6 +5,7 @@
 #include"Enemy.h"
 #include"Feed.h"
 #include"MapFeedSet.h"
+#include"Engine/SceneManager.h"
 
 PlayScene::PlayScene(GameObject* parent)
 	:GameObject(parent, "PlayScene")
@@ -22,6 +23,11 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
+	if (FindObject("Feed") == nullptr)
+	{
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_CLEAR);
+	}
 }
 
 void PlayScene::Draw()

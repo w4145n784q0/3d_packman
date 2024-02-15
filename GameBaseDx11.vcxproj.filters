@@ -135,8 +135,12 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Scene\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Feed.cpp" />
-    <ClCompile Include="MapFeedSet.cpp" />
+    <ClCompile Include="Feed.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="MapFeedSet.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -233,8 +237,12 @@
     <ClInclude Include="Enemy.h">
       <Filter>Scene\Play</Filter>
     </ClInclude>
-    <ClInclude Include="Feed.h" />
-    <ClInclude Include="MapFeedSet.h" />
+    <ClInclude Include="Feed.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="MapFeedSet.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

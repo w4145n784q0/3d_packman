@@ -4,6 +4,7 @@
 #include"Engine/Debug.h"
 #include"Stage.h"
 #include"Gauge.h"
+#include"Engine/SceneManager.h"
 
 namespace {
 	const float PLAYER_MOVE_SPEED{ 1.0f };
@@ -21,7 +22,7 @@ void Player::Initialize()
 {
 	hModel_ = Model::Load("Player.fbx");
 	assert(hModel_ >= 0);
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.25f);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.1f);
 	AddCollider(collision);
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
@@ -79,6 +80,8 @@ void Player::Update()
 		hpCrr_ = hpCrr_ - 2;
 		if (hpCrr_ < 0) {
 			hpCrr_ = 0;
+			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+			pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
 		}
 	}
 
@@ -121,7 +124,7 @@ void Player::Update()
 			//assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 			//float angle = acos(XMVectorGetX(vdot));//acos‚Íƒ‰ƒWƒAƒ“‚Å‚©‚¦‚Á‚Ä‚­‚é
 
-			//‹t—]Œ·‚Å‚Í‰ñ“]‚ª‚ª{‚©[‚©‚í‚©‚ç‚È‚¢‚Ì‚Å
+			//‹t—]Œ·‚Å‚Í‰ñ“]‚ª{‚©[‚©‚í‚©‚ç‚È‚¢‚Ì‚Å
 			//XMVECTOR vCross = XMVector3Cross(vFlont, move);//ŠOÏ‹‚ß‚é
 			//if (XMVectorGetY(vCross) < 0) {//‰ñ“]•ûŒü‚ª‹t‚¾‚Á‚½‚ç-‚©‚¯‚é
 			//	angle *= -1;
