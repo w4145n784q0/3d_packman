@@ -44,6 +44,5 @@ void Feed::OnCollision(GameObject* pTarget)
 	if (pTarget->GetObjectName() == "Player")
 	{
 		this->KillMe();
-		//clearcount_++;
 	}
 }

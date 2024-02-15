@@ -64,6 +64,13 @@ void Player::Update()
 		//moveDir = Dir::RIGHT;
 	}
 
+	//hpがなくなったときの処理
+	if (hpCrr_ < 0) {
+		hpCrr_ = 0;
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
+	}
+
 	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 	XMVECTOR postmp = XMVectorZero();//zeroベクトル
 	postmp = pos + speed * move;
@@ -78,11 +85,6 @@ void Player::Update()
 	else
 	{
 		hpCrr_ = hpCrr_ - 2;
-		if (hpCrr_ < 0) {
-			hpCrr_ = 0;
-			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-			pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
-		}
 	}
 
 	//postmp.x,postmp.z => int tx,tz :配列のインデックスに変換
@@ -147,4 +149,12 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+void Player::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Enemy")
+	{
+		hpCrr_ = hpCrr_ - 100;
+	}
 }
