@@ -3,7 +3,8 @@
 #include"Engine/CsvReader.h"
 
 MapFeedSet::MapFeedSet(GameObject* parent)
-	:GameObject(parent, "Feed")
+	:GameObject(parent, "MapFeedSet"), stageWidth_(0), stageHeight_(0),
+	ReturntmpX_(0),ReturntmpY_(0), ReturntmpZ_(0)
 {
 	CsvReader csv;
 	csv.Load("map2_.csv");//csv（コンマ区切り）で保存
@@ -30,6 +31,7 @@ MapFeedSet::MapFeedSet(GameObject* parent)
 
 void MapFeedSet::Initialize()
 {
+	Returntmp_.position_ = { 0,0,0 };
 	Transform floorTrans;
 	floorTrans.position_ = { 0.5,0,0 };
 
@@ -38,10 +40,15 @@ void MapFeedSet::Initialize()
 			floorTrans.position_ = { (float)x - (float)0.5, 0.2 ,(float)(14 - z) + (float)0.5 };
 
 			if (stageData_[z][x] == 0) {
+				
+				//transfeed(floorTrans);
+				transfeedX(floorTrans.position_.x);
+				transfeedY(floorTrans.position_.y);
+				transfeedZ(floorTrans.position_.z);
 				Instantiate<Feed>(this);
+
 				/*Model::SetTransform(hModel_, floorTrans);
 				Model::Draw(hModel_);*/
-
 			}
 		}
 	}

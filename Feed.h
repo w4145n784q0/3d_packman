@@ -1,16 +1,18 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include<vector>
+#include"MapFeedSet.h"
+
 using std::vector;
 
 class Feed :
     public GameObject
 {
+    MapFeedSet* pMapFeedSet_;
     int hModel_;//
-    vector<vector<int>> stageData_;
-    int stageWidth_, stageHeight_;
-    int feedcount_;
-    int clearcount_;
+   // int stageWidth_, stageHeight_;
+   /* int feedcount_;*/
+    //int clearcount_;
     
 public:
     //コンストラクタ
@@ -32,5 +34,9 @@ public:
     //何かに当たった
     //引数：pTarget 当たった相手
     void OnCollision(GameObject* pTarget) override;
+
+    float GetFeedX(float _x) { return _x; }
+    float GetFeedY(float _y) { return _y; }
+    float GetFeedZ(float _z) { return _z; }
 };
 

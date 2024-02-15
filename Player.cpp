@@ -21,6 +21,8 @@ void Player::Initialize()
 {
 	hModel_ = Model::Load("Player.fbx");
 	assert(hModel_ >= 0);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.25f);
+	AddCollider(collision);
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
 	pStage_ = (Stage *)FindObject("Stage");
