@@ -1,9 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
+
+class Stage;
+
 class Enemy :
     public GameObject
 {
     int hModel_;
+    float speed_;
+    Stage* pStage_;
 public:
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）

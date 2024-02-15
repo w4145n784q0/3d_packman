@@ -33,60 +33,59 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	/*enum Dir {
-		UP,LEFT,DOWN,RIGHT,NONE
-	};
-	int moveDir = Dir::NONE;*/
-
-	XMVECTOR vFlont = { 0,0,1,0 };//
-	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
-	float speed = 1.0;
-
-
-	if (Input::IsKeyDown(DIK_UP))
-	{
-		move = XMVECTOR{ 0,0,1,0 };
-		//moveDir = Dir::UP;
-	}
-	if (Input::IsKeyDown(DIK_LEFT))
-	{
-		move = XMVECTOR{ -1,0,0,0 };
-		//moveDir = Dir::LEFT;
-	}
-	if (Input::IsKeyDown(DIK_DOWN))
-	{
-		move = XMVECTOR{ 0,0,-1,0 };
-		//moveDir = Dir::DOWN;
-	}
-	if (Input::IsKeyDown(DIK_RIGHT))
-	{
-		move = XMVECTOR{ 1,0,0,0 };
-		//moveDir = Dir::RIGHT;
-	}
-
 	//hpがなくなったときの処理
 	if (hpCrr_ < 0) {
 		hpCrr_ = 0;
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
 	}
+	/*enum Dir {
+		UP,LEFT,DOWN,RIGHT,NONE
+	};
+	int moveDir = Dir::NONE;*/
+	//ここから移動処理
+	XMVECTOR vFlont = { 0,0,1,0 };//
+	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
+	float speed = 0.20;
 
-	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
+	if (Input::IsKey(DIK_UP))
+	{
+		move = XMVECTOR{ 0,0,1,0 };
+		//moveDir = Dir::UP;
+	}
+	if (Input::IsKey(DIK_LEFT))
+	{
+		move = XMVECTOR{ -1,0,0,0 };
+		//moveDir = Dir::LEFT;
+	}
+	if (Input::IsKey(DIK_DOWN))
+	{
+		move = XMVECTOR{ 0,0,-1,0 };
+		//moveDir = Dir::DOWN;
+	}
+	if (Input::IsKey(DIK_RIGHT))
+	{
+		move = XMVECTOR{ 1,0,0,0 };
+		//moveDir = Dir::RIGHT;
+	}
+
+	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));//自機の位置を参照渡し
 	XMVECTOR postmp = XMVectorZero();//zeroベクトル
-	postmp = pos + speed * move;
+	postmp = pos + speed * move;//作業領域　次が壁かどうかの判断に使う
 
 	int tx, ty;
-	tx = (int)(XMVectorGetX(postmp) + 1.0f);
-	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(postmp) + 1.0f);
-	if (!(pStage_->IsWall(tx, ty)))
+	tx = (int)(XMVectorGetX(postmp) + 1.0f);//x座標の進む一個先
+	ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(postmp) + 1.0f);//y座標(実際にはz)の進む一個先
+	if (!(pStage_->IsWall(tx, ty)))//次に進む先が壁じゃないなら
 	{
-		pos = postmp;
+		pos = postmp;//作業領域に入れてた分を実際に自機の位置を入れる変数へ代入
 	}
 	else
 	{
-		hpCrr_ = hpCrr_ - 2;
+		hpCrr_ = hpCrr_ - 2;//壁なら変数に代入せず、ｈｐ減らす
 	}
-
+	//ここまで移動処理
+	
 	//postmp.x,postmp.z => int tx,tz :配列のインデックスに変換
 	//仮にmapの配列をmap[][]とする
 	//移動先がフロアだったら動く(STAGE_OBJ::FLOOR => 0)
@@ -110,6 +109,7 @@ void Player::Update()
 
 
 	if (!XMVector3Equal(move, XMVectorZero())){
+		//ここから回転の処理
 		XMStoreFloat3(&(transform_.position_), pos);
 
 		XMMATRIX rot = XMMatrixRotationY(XM_PIDIV2);//二分のπ
@@ -134,7 +134,7 @@ void Player::Update()
 
 		transform_.rotate_.y = XMConvertToDegrees(-angle);//xmconvert~でラジアンを角度にする
 
-		
+		//ここまで回転の処理
 	}
 	Gauge* gg = (Gauge*)FindObject("Gauge");
 	gg->SetGaugeVal(hpCrr_, hpMax_);
