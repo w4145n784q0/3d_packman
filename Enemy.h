@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 
 class Stage;
+class Player;
 
 class Enemy :
     public GameObject
@@ -9,6 +10,7 @@ class Enemy :
     int hModel_;
     float speed_;
     Stage* pStage_;
+    Player* pPlayer_;
 public:
     //コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）
@@ -26,6 +28,12 @@ public:
     //開放
     void Release() override;
 
-   // void OnCollision(GameObject* pTarget) override;
+    float PlayerEnemyLength(float _x, float _y);
+
+   int PlayerEnemyDir(float _x, float _y);
+
+    float GetPositionX(float x) { return x; } 
+    float GetPositionY(float y) { return y; } 
+    float GetPositionZ(float z) { return z; }
 };
 

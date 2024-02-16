@@ -1,8 +1,10 @@
 #include "Enemy.h"
 #include"Engine/Model.h"
 #include"Stage.h"
+#include"Engine/Debug.h"
+#include"Player.h"
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent,"Enemy"),hModel_(-1)
+	:GameObject(parent,"Enemy"),hModel_(-1),speed_(0.1)
 {
 }
 
@@ -13,18 +15,35 @@ void Enemy::Initialize()
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
 	AddCollider(collision);
 	pStage_ = (Stage*)FindObject("Stage");
+	pPlayer_ = (Player*)FindObject("Player");
 	transform_.position_ = { 0.5,0,6.5 };
 	transform_.scale_ = { 0.5,0.5,0.5 };
 }
 
 void Enemy::Update()
 {
-	XMVECTOR vFlont = { 0,0,1,0 };//
-	XMVECTOR move{ 0,0,0,0 };//ˆÚ“®ƒxƒNƒgƒ‹@ˆÚ“®æ
-	speed_ = 0.2;
-	transform_.position_.x += speed_;
-	if(transform_.position_.x >= 13)
-		transform_.position_.x -= speed_;
+	float lng = PlayerEnemyLength(pPlayer_->SetTransX(), pPlayer_->SetTransZ());
+	if (lng < 6)
+	{
+		switch (PlayerEnemyDir(pPlayer_->SetTransX(), pPlayer_->SetTransZ()))
+		{
+		case 1:
+			transform_.position_.x += 0.1;
+			break;
+		case 2:
+			transform_.position_.x -= 0.1;
+			break;
+		case 3:
+			transform_.position_.z += 0.1;
+			break;
+		case 4:
+			transform_.position_.z -= 0.1;
+			break;
+		default:
+			break;
+		}
+	}
+		//transform_.position_.x += 0.1;
 }
 
 void Enemy::Draw()
@@ -35,4 +54,32 @@ void Enemy::Draw()
 
 void Enemy::Release()
 {
+}
+
+float Enemy::PlayerEnemyLength(float _x, float _y)
+{
+	float myx = transform_.position_.x;//x2
+	float myy = transform_.position_.z;//y2
+	float xlen = myx - _x;
+	float ylen = myy - _y;
+
+	float re = sqrt((xlen * xlen) + (ylen * ylen));
+	return re;
+}
+
+int Enemy::PlayerEnemyDir(float _x, float _y)
+{
+	float myx = transform_.position_.x;//x2
+	float myy = transform_.position_.z;//y2
+
+	if (myx < _x)//player‚ª“G‚æ‚è‰E‚É‚¢‚é‚È‚ç
+		return 1;
+	else if (myx > _x)//player‚ª“G‚æ‚è¶‚É‚¢‚é‚È‚ç
+		return 2;
+	else if (myy < _y)//player‚ª“G‚æ‚èã‚É‚¢‚é‚È‚ç
+		return 3;
+	else if (myy > _y)//player‚ª“G‚æ‚è‰º‚É‚¢‚é‚È‚ç
+		return 4;
+	else
+		return 0;
 }

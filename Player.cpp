@@ -44,7 +44,7 @@ void Player::Update()
 	};
 	int moveDir = Dir::NONE;*/
 	//ここから移動処理
-	XMVECTOR vFlont = { 0,0,1,0 };//
+	//XMVECTOR vFlont = { 0,0,1,0 };//
 	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
 	float speed = 0.20;
 

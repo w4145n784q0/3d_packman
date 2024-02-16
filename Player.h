@@ -28,6 +28,9 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
+	float SetTransX() { return transform_.position_.x; }
+	float SetTransZ() { return transform_.position_.z; }
+
 	void OnCollision(GameObject* pTarget) override;
 };
 
