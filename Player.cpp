@@ -46,7 +46,7 @@ void Player::Update()
 	//ここから移動処理
 	//XMVECTOR vFlont = { 0,0,1,0 };//
 	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
-	float speed = 0.20;
+	float speed = 0.30;
 
 	if (Input::IsKey(DIK_UP))
 	{
@@ -104,8 +104,6 @@ void Player::Update()
 	//Debug::Log(ty,true);
 	//Debug::Log(":");
 	//Debug::Log(pStage_->IsWall(tx, ty));
-
-	
 
 
 	if (!XMVector3Equal(move, XMVectorZero())){

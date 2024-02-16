@@ -37,7 +37,7 @@ bool Stage::IsWall(int _x, int _y)
 }
 
 Stage::Stage(GameObject* parent)
-	:GameObject(parent, "Stage")//,hFloor_(-1),hBlock_(-1)
+	:GameObject(parent, "Stage"),hFloor_(-1),hBlock_(-1)
 {
 	CsvReader csv;
 	csv.Load("map2_.csv");//csv（コンマ区切り）で保存
@@ -68,14 +68,13 @@ void Stage::Initialize()
 	assert(hFloor_ >= 0);
 	hBlock_ = Model::Load("wall.fbx");
 	assert(hBlock_ >= 0);
-	Camera::SetPosition({ 6.5, 17, -1 });
+	Camera::SetPosition({ 6.5, 12, -5 });
 	Camera::SetTarget({ 6.5, 0, 5.5 });
 	
 }
 
 void Stage::Update()
 {
-
 }
 
 void Stage::Draw()
@@ -113,8 +112,6 @@ void Stage::Draw()
 			else {
 				Model::SetTransform(hFloor_, floorTrans);
 				Model::Draw(hFloor_);
-
-
 			}
 		}
 

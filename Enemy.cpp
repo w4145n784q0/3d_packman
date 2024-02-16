@@ -4,7 +4,7 @@
 #include"Engine/Debug.h"
 #include"Player.h"
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent,"Enemy"),hModel_(-1),speed_(0.1)
+	:GameObject(parent,"Enemy"),hModel_(-1),speed_(0.1),pStage_(nullptr), pPlayer_(nullptr)
 {
 }
 
@@ -43,7 +43,6 @@ void Enemy::Update()
 			break;
 		}
 	}
-		//transform_.position_.x += 0.1;
 }
 
 void Enemy::Draw()
@@ -58,8 +57,8 @@ void Enemy::Release()
 
 float Enemy::PlayerEnemyLength(float _x, float _y)
 {
-	float myx = transform_.position_.x;//x2
-	float myy = transform_.position_.z;//y2
+	float myx = transform_.position_.x;
+	float myy = transform_.position_.z;
 	float xlen = myx - _x;
 	float ylen = myy - _y;
 
@@ -69,8 +68,8 @@ float Enemy::PlayerEnemyLength(float _x, float _y)
 
 int Enemy::PlayerEnemyDir(float _x, float _y)
 {
-	float myx = transform_.position_.x;//x2
-	float myy = transform_.position_.z;//y2
+	float myx = transform_.position_.x;
+	float myy = transform_.position_.z;
 
 	if (myx < _x)//player‚ª“G‚æ‚è‰E‚É‚¢‚é‚È‚ç
 		return 1;

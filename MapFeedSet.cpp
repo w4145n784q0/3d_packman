@@ -31,7 +31,6 @@ MapFeedSet::MapFeedSet(GameObject* parent)
 
 void MapFeedSet::Initialize()
 {
-	Returntmp_.position_ = { 0,0,0 };
 	Transform floorTrans;
 	floorTrans.position_ = { 0.5,0,0 };
 
@@ -40,15 +39,11 @@ void MapFeedSet::Initialize()
 			floorTrans.position_ = { (float)x - (float)0.5, 0.2 ,(float)(14 - z) + (float)0.5 };
 
 			if (stageData_[z][x] == 0) {
-				
-				//transfeed(floorTrans);
-				transfeedX(floorTrans.position_.x);
-				transfeedY(floorTrans.position_.y);
-				transfeedZ(floorTrans.position_.z);
+			
+				transfeedX(floorTrans.position_.x);//ここで餌を置く度に座標を保管しておく
+				transfeedY(floorTrans.position_.y);//保管した座標はfeedの初期化に使う
+				transfeedZ(floorTrans.position_.z);//保管が終わってからクラスの初期化
 				Instantiate<Feed>(this);
-
-				/*Model::SetTransform(hModel_, floorTrans);
-				Model::Draw(hModel_);*/
 			}
 		}
 	}

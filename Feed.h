@@ -9,10 +9,7 @@ class Feed :
     public GameObject
 {
     MapFeedSet* pMapFeedSet_;
-    int hModel_;//
-   // int stageWidth_, stageHeight_;
-   /* int feedcount_;*/
-    //int clearcount_;
+    int hModel_;
     
 public:
     //コンストラクタ

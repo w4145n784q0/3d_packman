@@ -9,8 +9,7 @@ class MapFeedSet :
 {
     vector<vector<int>> stageData_;
     int stageWidth_, stageHeight_;
-    Transform Returntmp_;
-    float ReturntmpX_;
+    float ReturntmpX_;//feedオブジェクトひとつひとつに座標を返すための領域
     float ReturntmpY_;
     float ReturntmpZ_;
 public:
@@ -30,15 +29,24 @@ public:
     //開放
     void Release() override;
 
-    //void transfeed(Transform _pos) { Returntmp_= _pos; }
+    /// <summary>
+    ///初期化時に座標を保存する
+    /// </summary>
+    /// <param name="_x">保存したい座標x</param>
     void transfeedX(float _x) { ReturntmpX_ = _x; }
+    /// <summary>
+  ///初期化時に座標を保存する
+  /// </summary>
+  /// <param name="_x">保存したい座標y</param>
     void transfeedY(float _y) { ReturntmpY_ = _y; }
+    /// <summary>
+  ///初期化時に座標を保存する
+  /// </summary>
+  /// <param name="_x">保存したい座標z</param>
     void transfeedZ(float _z) { ReturntmpZ_ = _z; }
 
     float GetReturnTmpX() { return ReturntmpX_; }
     float GetReturnTmpY() { return ReturntmpY_; }
     float GetReturnTmpZ() { return ReturntmpZ_; }
-
-    //Transform GetReturnTmp() { return Returntmp_; }
 };
 

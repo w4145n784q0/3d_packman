@@ -15,10 +15,9 @@ void Feed::Initialize()
 	hModel_ = Model::Load("feed.fbx");
 	assert(hModel_ >= 0);
 	pMapFeedSet_ = (MapFeedSet*)FindObject("MapFeedSet");
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 1.2f);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
 	AddCollider(collision);
-	//transform_ = GetTransfeed(pMapFeedSet_->GetReturnTmp());
-	transform_.position_.x = GetFeedX(pMapFeedSet_->GetReturnTmpX());
+	transform_.position_.x = GetFeedX(pMapFeedSet_->GetReturnTmpX());//餌の設置クラスから設置する座標を取ってくる
 	transform_.position_.y = GetFeedY(pMapFeedSet_->GetReturnTmpY());
 	transform_.position_.z = GetFeedZ(pMapFeedSet_->GetReturnTmpZ());
 }
