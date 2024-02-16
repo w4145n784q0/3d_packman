@@ -46,7 +46,7 @@ void Player::Update()
 	//ここから移動処理
 	//XMVECTOR vFlont = { 0,0,1,0 };//
 	XMVECTOR move{ 0,0,0,0 };//移動ベクトル　移動先
-	float speed = 0.30;
+	float speed = 0.25;
 
 	if (Input::IsKey(DIK_UP))
 	{
@@ -153,6 +153,6 @@ void Player::OnCollision(GameObject* pTarget)
 {
 	if (pTarget->GetObjectName() == "Enemy")
 	{
-		hpCrr_ = hpCrr_ - 100;
+		hpCrr_ = hpCrr_ - 5;
 	}
 }
